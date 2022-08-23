@@ -73,6 +73,7 @@
             "sslCert": "./src/ssl/server.crt",
             "ssl": true
           },
+          
           "configurations": {
             "production": {
               "browserTarget": "DatingApp:build:production"
