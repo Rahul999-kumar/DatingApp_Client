@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './Component/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,10 @@ import { MemberDetailComponent } from './Component/member-detail/member-detail.c
 import { ListsComponent } from './Component/lists/lists.component';
 import { MessagesComponent } from './Component/messages/messages.component';
 import { SharedModule } from './Modules/shared.module';
+import { AppErrorComponent } from './Error/app-error/app-error.component';
+import { InterceptorInterceptor } from './Interceptors/interceptor.interceptor';
+import { NotFoundComponent } from './Error/not-found/not-found.component';
+import { ServerErrorComponent } from './Error/server-error/server-error.component';
 
 
 
@@ -26,7 +30,10 @@ import { SharedModule } from './Modules/shared.module';
     MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    AppErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,9 @@ import { SharedModule } from './Modules/shared.module';
     SharedModule
     
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
